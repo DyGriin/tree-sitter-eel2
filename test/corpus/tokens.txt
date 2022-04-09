@@ -1,0 +1,98 @@
+==================
+number
+==================
+
+0.103;
+24.;
+.990;
+0X;
+$x9Fa;
+$~;
+$~10;
+$e;
+$PhI;
+$pI;
+'00\\\'';
+'\\';
+$''';
+
+---
+
+(program
+  (number)
+  (number)
+  (number)
+  (number)
+  (number)
+  (number)
+  (number)
+  (number)
+  (number)
+  (number)
+  (number)
+  (number)
+  (number)
+)
+
+==================
+identifier
+==================
+
+a;
+_0a.Get_value;
+this...12;
+
+---
+
+(program (identifier) (identifier) (identifier))
+
+==================
+string identifier
+==================
+
+#;
+#myStr.0a;
+#...;
+
+---
+
+(program (string_identifier) (string_identifier) (string_identifier))
+
+==================
+string literal
+==================
+
+"\\";
+"//";
+"\\d\"";
+"foo" "bar";
+"foo" "bar" "baz";
+"foo
+bar";
+
+---
+
+(program
+  (string)
+  (string)
+  (string)
+  (chained_string (string) (string))
+  (chained_string (string) (string) (string))
+  (string)
+)
+
+==================
+comment
+==================
+
+/**
+* foo
+*/
+10; //*bar
+
+---
+
+(program
+  (comment)
+  (number) (comment)
+)

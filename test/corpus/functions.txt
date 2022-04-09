@@ -1,0 +1,63 @@
+====================================
+function
+====================================
+
+function a...() (
+    0
+);
+
+---
+
+(program
+    (function_def
+        name: (identifier)
+        (parameter_list)
+        body: (parenthesized (number))
+    )
+)
+
+====================================
+function without argument list
+====================================
+
+function foo local() (
+    0
+);
+
+---
+
+(program
+    (function_def
+        name: (identifier)
+        (local_table (parameter_list))
+        body: (parenthesized (number))
+    )
+)
+
+====================================
+function argument list delim
+====================================
+
+function foo(,a,,, b,) instance(x y z) (
+    0
+);
+
+function foo(,, ,, , ,) (0);
+
+---
+
+(program
+    (function_def
+        name: (identifier)
+        (parameter_list (identifier) (identifier))
+        (instance_table
+            (parameter_list (identifier) (identifier) (identifier)))
+        body: (parenthesized (number))
+    )
+    (function_def
+        name: (identifier)
+        (parameter_list)
+        body: (parenthesized (number))
+    )
+)
+

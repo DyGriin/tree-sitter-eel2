@@ -1,0 +1,211 @@
+==================
+parenthesized
+==================
+
+(1);
+(2;;; 3);
+(5; 6;;);
+(5; 6; 7; 8);
+
+---
+
+(program
+    (parenthesized (number))
+    (parenthesized (number) (number))
+    (parenthesized (number) (number))
+    (parenthesized (number) (number) (number) (number))
+)
+
+==================
+assignment
+==================
+
+foo = 3 + 4;
+c = a + b += 4 * 6;
+
+---
+
+(program
+    (assignment
+        (identifier)
+        (binary (number) (number))
+    )
+    (assignment
+        (identifier)
+        (binary
+            (identifier)
+            (assignment
+                (identifier)
+                (binary (number) (number))
+    )))
+)
+
+==================
+unary
+==================
+
+-5;
+!foo;
++"bar";
+++-++#;
+
+---
+
+(program
+    (unary (number))
+    (unary (identifier))
+    (unary (string))
+    (unary (unary (unary (unary (unary
+        (string_identifier))))))
+)
+
+==================
+binary
+==================
+
+a +- 5;
+a + 5 ^ -b * 3;
+a | b !== 3 || !a;
+
+---
+
+(program
+    (binary (identifier) (unary (number)))
+    (binary
+        (identifier)
+        (binary
+            (binary
+                (number)
+                (unary (identifier)))
+            (number))
+    )
+    (binary
+        (binary
+            (binary (identifier) (identifier))
+            (number))
+        (unary (identifier))
+    )
+)
+
+==================
+conditional
+==================
+
+a = c? d : e;
+c? a = 5;
+i? : k;
+1? i : 2? j : 3? k : l;
+
+---
+
+(program
+    (assignment
+        lhs: (identifier)
+        rhs: (conditional
+            cond: (identifier)
+            then: (identifier)
+            else: (identifier))
+    )
+    (conditional
+        cond: (identifier)
+        then: (assignment
+            lhs: (identifier)
+            rhs: (number))
+    )
+    (conditional
+        cond: (identifier)
+        else: (identifier)
+    )
+    (conditional
+        cond: (number)
+        then: (identifier)
+        else: (conditional
+            cond: (number)
+            then: (identifier)
+            else: (conditional
+                cond: (number)
+                then: (identifier)
+                else: (identifier)
+            )
+        )
+    )
+)
+
+==================
+function call
+==================
+
+a();
+bar(a, b, c;;5) = 5;
+
+---
+
+(program
+    (function_call
+        name: (identifier)
+        args: (argument_list)
+    )
+
+    (assignment
+        lhs: (function_call
+            name: (identifier)
+            args: (argument_list
+                (argument (identifier))
+                (argument (identifier))
+                (argument (identifier) (number))))
+        rhs: (number)
+    )
+)
+
+==================
+index
+==================
+
+#m[] = 6;
+5 + +6[3];
+"x"[3;5;;;];
+
+---
+
+(program
+    (assignment
+        lhs: (index
+            start: (string_identifier))
+        rhs: (number)
+    )
+    (binary
+        lhs: (number)
+        rhs: (unary rhs: (index
+            start: (number)
+            index: (argument (number))
+        ))
+    )
+    (index
+        start: (string)
+        index: (argument (number) (number))
+    )
+)
+
+==================
+while
+==================
+
+while (6; test);
+5 + while (t) (1);
+
+---
+
+(program
+    (while
+        body: (parenthesized
+            (number) (identifier)
+        )
+    )
+    (binary
+        lhs: (number)
+        rhs: (while
+            cond: (parenthesized (identifier))
+            body: (parenthesized (number))
+        )
+    )
+)
