@@ -27,6 +27,10 @@ module.exports = grammar({
 
     extras: $ => [$.comment, /\s/],
 
+    supertypes: $ => [
+        $._expression
+    ],
+
     rules: {
         program: $ => repeat($._top_level_statement),
         _top_level_statement: $ => choice(
