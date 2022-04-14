@@ -32,10 +32,17 @@ module.exports = grammar({
     ],
 
     rules: {
-        program: $ => repeat($._top_level_statement),
+        program: $ => seq(
+            repeat($._top_level_statement),
+            optional($._top_level_last)
+        ),
         _top_level_statement: $ => choice(
-            $.function_def,
+            seq($.function_def, ";"),
             $._statement
+        ),
+        _top_level_last: $ => choice(
+            $.function_def,
+            $._expression
         ),
 
         // FUNCTION
@@ -47,7 +54,6 @@ module.exports = grammar({
                 seq(repeat1($._context_table))
             ),
             field("body", $.parenthesized),
-            ";"
         ),
 
         _context_table: $ => choice(

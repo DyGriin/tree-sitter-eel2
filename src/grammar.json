@@ -2,13 +2,52 @@
   "name": "eel",
   "rules": {
     "program": {
-      "type": "REPEAT",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_top_level_statement"
-      }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_top_level_statement"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_top_level_last"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "_top_level_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "function_def"
+            },
+            {
+              "type": "STRING",
+              "value": ";"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_statement"
+        }
+      ]
+    },
+    "_top_level_last": {
       "type": "CHOICE",
       "members": [
         {
@@ -17,7 +56,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_statement"
+          "name": "_expression"
         }
       ]
     },
@@ -76,10 +115,6 @@
             "type": "SYMBOL",
             "name": "parenthesized"
           }
-        },
-        {
-          "type": "STRING",
-          "value": ";"
         }
       ]
     },

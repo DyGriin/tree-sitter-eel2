@@ -42,7 +42,7 @@ function foo(,a,,, b,) instance(x y z) (
     0
 );
 
-function foo(,, ,, , ,) (0);
+function foo(,, ,, , ,) (0)
 
 ---
 
