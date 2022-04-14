@@ -66,6 +66,7 @@ binary
 a +- 5;
 a + 5 ^ -b * 3;
 a | b !== 3 || !a;
+a << b >> c;
 
 ---
 
@@ -84,6 +85,10 @@ a | b !== 3 || !a;
             (binary (identifier) (identifier))
             (number))
         (unary (identifier))
+    )
+    (binary
+        (binary (identifier) (identifier))
+        (identifier)
     )
 )
 

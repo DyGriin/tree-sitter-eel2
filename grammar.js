@@ -108,7 +108,7 @@ module.exports = grammar({
                 [PREC.SUB, "-"],
                 [PREC.MUL, "*"],
                 [PREC.DIV, "/"],
-                [PREC.MOD, "%"],
+                [PREC.MOD, "%", ">>", "<<"],
                 [PREC.POW, "^"]
             ].reduce((table, [precedence, ...ops]) => {
                 table.push(...ops.map((operator) =>
