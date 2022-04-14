@@ -142,6 +142,7 @@ function call
 
 a();
 bar(a, b, c;;5) = 5;
+whileTrue(0);
 
 ---
 
@@ -159,6 +160,10 @@ bar(a, b, c;;5) = 5;
                 (argument (identifier))
                 (argument (identifier) (number))))
         rhs: (number)
+    )
+    (function_call
+        name: (identifier)
+        args: (argument_list (argument (number)))
     )
 )
 

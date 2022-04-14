@@ -436,6 +436,11 @@
     }
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "index",
     "named": true,
     "fields": {
@@ -787,10 +792,6 @@
   {
     "type": "globals",
     "named": false
-  },
-  {
-    "type": "identifier",
-    "named": true
   },
   {
     "type": "instance",

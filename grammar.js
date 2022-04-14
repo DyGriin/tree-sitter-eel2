@@ -47,7 +47,7 @@ module.exports = grammar({
 
         // FUNCTION
         function_def: $ => seq(
-            "function",
+            alias($._function_word, "function"),
             field("name", $.identifier),
             choice(
                 seq($.parameter_list, repeat($._context_table)),
@@ -177,11 +177,11 @@ module.exports = grammar({
         ),
         argument: $ => $._inblock,
 
-        while: $ => seq(
-            "while",
+        while: $ => prec(1, seq(  // higher precedence than $.function_call
+            alias($._while_word, "while"),
             optional(field("cond", $.parenthesized)),
             field("body", $.parenthesized),
-        ),
+        )),
 
         index: $ => seq(
             field("start", $._rvalue_expr),
@@ -190,11 +190,23 @@ module.exports = grammar({
             "]"
         ),
 
-        // TOKENS/LITERALS
-        identifier: $ => /[a-zA-Z_][a-zA-Z0-9\._]*/,
+        // IDENTIFIERS
+        identifier: $ => choice(
+            $._identifier,
+            $._identifier_from_keyword
+        ),
+
+        _identifier: $ => /[a-zA-Z_][a-zA-Z0-9\._]*/,
+        _identifier_from_keyword: $ => choice(
+            $._function_word,
+            $._while_word
+        ),
+        _function_word: $ => "function",
+        _while_word: $ => "while",
 
         string_identifier: $ => /#[a-zA-Z0-9\._]*/,
 
+        // LITERALS
         number: $ => token(choice(
             /\d+\.?\d*/,
             /\.\d+/,

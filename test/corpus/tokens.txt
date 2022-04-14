@@ -19,19 +19,19 @@ $''';
 ---
 
 (program
-  (number)
-  (number)
-  (number)
-  (number)
-  (number)
-  (number)
-  (number)
-  (number)
-  (number)
-  (number)
-  (number)
-  (number)
-  (number)
+    (number)
+    (number)
+    (number)
+    (number)
+    (number)
+    (number)
+    (number)
+    (number)
+    (number)
+    (number)
+    (number)
+    (number)
+    (number)
 )
 
 ==================
@@ -73,12 +73,12 @@ bar";
 ---
 
 (program
-  (string)
-  (string)
-  (string)
-  (chained_string (string) (string))
-  (chained_string (string) (string) (string))
-  (string)
+    (string)
+    (string)
+    (string)
+    (chained_string (string) (string))
+    (chained_string (string) (string) (string))
+    (string)
 )
 
 ==================
@@ -93,6 +93,23 @@ comment
 ---
 
 (program
-  (comment)
-  (number) (comment)
+    (comment)
+    (number) (comment)
+)
+
+==================
+keyword as identifier
+==================
+
+function = global;
+while + while(0);
+
+---
+
+(program
+    (assignment (identifier) (identifier))
+    (binary
+        (identifier)
+        (while (parenthesized (number)))
+    )
 )
