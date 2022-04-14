@@ -1,0 +1,16 @@
+loop = loop(32, a += 1);
+// <- variable
+//   ^ operator
+//     ^^^^ keyword
+//              ^ variable
+//                ^^ operator
+while + while(1) (t);
+// <- variable
+//      ^^^^^ keyword
+$phi? -1 : 0;
+// <- number
+//  ^ operator
+//       ^ operator
+# = function(5);
+// <- variable
+//  ^ function

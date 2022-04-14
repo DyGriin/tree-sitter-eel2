@@ -1,0 +1,5 @@
+function function() local(x y) (
+// <- keyword
+//       ^ function
+//                  ^ keyword
+);

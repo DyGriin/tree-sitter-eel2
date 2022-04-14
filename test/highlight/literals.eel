@@ -1,0 +1,15 @@
+$phi;
+// <- number
+$E;
+// <- number
+$'v';
+// <- number
+$xEEFCC;
+// <- number
+.404;
+// <- number
+'abc';
+// <- number
+"foo" "//";
+// <- string
+//    ^^^^ string
