@@ -128,7 +128,7 @@ module.exports = grammar({
             }, [])
         ),
 
-        conditional: $ => prec.right(PREC.ASSIGN, choice(
+        conditional: $ => prec.right(PREC.CONDITIONAL, choice(
             seq(field("cond", $._expression), "?",
                 optional(field("then", $._expression)),
                 ":", field("else", $._expression)),
