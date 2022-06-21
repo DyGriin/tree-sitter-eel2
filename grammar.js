@@ -23,7 +23,7 @@ const PREC = {
 };
 
 module.exports = grammar({
-    name: "eel",
+    name: "eel2",
 
     extras: $ => [$.comment, /\s/],
 
